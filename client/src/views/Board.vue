@@ -1,20 +1,58 @@
 <template>
-  <div class="board">{{board.title}}</div>
+  <div class="board">
+    <div>{{board.title}}</div>
+    <!-- <button @click="showForm">New List</button> -->
+    <form @submit.prevent="createList">
+      <input
+        type="text"
+        name="title"
+        id="title"
+        v-model="newList.title"
+        placeholder="Enter list title"
+        required
+      />
+      <button type="submit">Add list</button>
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
   name: "board",
+  mounted() {
+    this.$store.dispatch("getBoardById", this.$route.params.boardId);
+    this.$store.dispatch("getLists", this.$route.params.boardId);
+  },
+  data() {
+    return {
+      newList: {
+        title: "",
+        boardId: this.$route.params.boardId
+      }
+    };
+  },
   computed: {
     board() {
       return (
-        //FIXME This does not work on page reload because the boards array is empty in the store
-        this.$store.state.boards.find(b => b._id == this.boardId) || {
+        this.$store.state.activeBoard || {
           title: "Loading..."
         }
       );
     }
   },
-  props: ["boardId"]
+  lists() {
+    return this.$store.state.lists.find(list => list.boardId == this.board.id);
+  },
+  props: ["boardId"],
+  methods: {
+    createList() {
+      let list = { ...this.newList };
+      this.$store.dispatch("createList", list);
+      this.newList = {
+        title: "",
+        boardId: ""
+      };
+    }
+  }
 };
 </script>
