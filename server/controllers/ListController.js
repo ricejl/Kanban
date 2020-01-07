@@ -18,7 +18,7 @@ export default class ListController {
   defaultRoute(req, res, next) {
     next({ status: 404, message: "No Such Route" });
   }
-  // FIXME pickup here - must update all functions below this point
+
   async create(req, res, next) {
     try {
       req.body.authorId = req.session.uid;

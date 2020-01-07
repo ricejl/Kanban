@@ -19,9 +19,9 @@ class ListService {
     return data;
   }
 
-  async edit(id, userId, update) {
+  async edit(listId, userId, update) {
     let data = await _repository.findOneAndUpdate(
-      { _id: id, authorId: userId },
+      { _id: listId, authorId: userId },
       update,
       { new: true }
     );
@@ -31,9 +31,9 @@ class ListService {
     return data;
   }
 
-  async delete(id, userId) {
+  async delete(listId, userId) {
     let data = await _repository.findOneAndRemove({
-      _id: id,
+      _id: listId,
       authorId: userId
     });
     if (!data) {
