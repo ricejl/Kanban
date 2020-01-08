@@ -56,7 +56,7 @@ export default {
       this.$store.dispatch("createList", list);
       this.newList = {
         title: "",
-        boardId: ""
+        boardId: this.$route.params.boardId
       };
     }
   }

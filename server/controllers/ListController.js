@@ -9,6 +9,7 @@ export default class ListController {
       .use(Authorize.authenticated)
       .get("/:id/tasks", this.getTasksByListId)
       .post("", this.create)
+      // .post("/:id/tasks", this.createTaskByListId)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);

@@ -3,6 +3,7 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">{{listData.title}}</h5>
+        <button @click="deleteList(listData.boardId, listData.id)">X</button>
         <task v-for="task in tasks" :key="task.id" :taskData="task"></task>
 
         <form @submit.prevent="createTask">
@@ -47,9 +48,12 @@ export default {
       this.$store.dispatch("createTask", task);
       this.newTask = {
         content: "",
-        boardId: "",
-        listId: ""
+        boardId: this.listData.boardId,
+        listId: this.listData.id
       };
+    },
+    deleteList(boardId, listId) {
+      this.$store.dispatch("deleteList", { boardId, listId });
     }
   },
   computed: {

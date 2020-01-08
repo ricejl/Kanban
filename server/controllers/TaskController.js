@@ -7,7 +7,7 @@ export default class TaskController {
     this.router = express
       .Router()
       .use(Authorize.authenticated)
-      .post("", this.create)
+      .post("", this.createTask)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
@@ -19,10 +19,10 @@ export default class TaskController {
     next({ status: 404, message: "No Such Route" });
   }
 
-  async create(req, res, next) {
+  async createTask(req, res, next) {
     try {
       req.body.authorId = req.session.uid;
-      let data = await _taskService.create(req.body);
+      let data = await _taskService.createTask(req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);

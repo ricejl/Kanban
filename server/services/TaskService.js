@@ -14,7 +14,7 @@ class TaskService {
   }
 
   // FIXME pickup here - all functions below this point must be updated
-  async create(rawData) {
+  async createTask(rawData) {
     let data = await _repository.create(rawData);
     return data;
   }

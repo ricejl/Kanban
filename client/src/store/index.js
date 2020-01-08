@@ -123,6 +123,11 @@ export default new Vuex.Store({
         commit("setLists", res.data);
       });
     },
+    deleteList({ commit, dispatch }, { boardId, listId }) {
+      api.delete("lists/" + listId).then(res => {
+        dispatch("getLists", boardId)
+      })
+    },
     //#endregion
 
     //#region -- TASK --
@@ -135,7 +140,12 @@ export default new Vuex.Store({
       api.get("lists/" + listId + "/tasks").then(res => {
         commit("setTasks", res.data);
       });
-    }
+    },
+    deleteTask({ commit, dispatch }, { listId, taskId }) {
+      api.delete("tasks/" + taskId).then(res => {
+        dispatch("getTasks", listId);
+      });
+    },
     //#endregion
   }
 });
