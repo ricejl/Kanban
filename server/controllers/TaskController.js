@@ -8,6 +8,7 @@ export default class TaskController {
       .Router()
       .use(Authorize.authenticated)
       .post("", this.createTask)
+      .post("/:id/comments", this.addComment)
       .put("/:id", this.edit)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
@@ -23,6 +24,15 @@ export default class TaskController {
     try {
       req.body.authorId = req.session.uid;
       let data = await _taskService.createTask(req.body);
+      return res.status(201).send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addComment(req, res, next) {
+    try {
+      let data = await _taskService.addComment(req.params.id, req.body);
       return res.status(201).send(data);
     } catch (error) {
       next(error);

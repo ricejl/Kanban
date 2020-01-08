@@ -6,7 +6,7 @@
         <button @click="deleteList(listData.boardId, listData.id)">X</button>
         <task v-for="task in tasks" :key="task.id" :taskData="task"></task>
 
-        <form @submit.prevent="createTask">
+        <form @submit.prevent="createTask()">
           <input
             type="text"
             name="task"
@@ -47,7 +47,7 @@ export default {
       let task = { ...this.newTask };
       this.$store.dispatch("createTask", task);
       this.newTask = {
-        content: "",
+        description: "",
         boardId: this.listData.boardId,
         listId: this.listData.id
       };
@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     tasks() {
-      return this.$store.state.tasks;
+      return this.$store.state.tasks[this.listData.id] || [];
     }
   }
 };

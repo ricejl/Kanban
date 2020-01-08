@@ -19,6 +19,20 @@ class TaskService {
     return data;
   }
 
+  async addComment(taskId, rawData) {
+    console.log("rawData from add comment in task service", rawData);
+    let data = await _repository.findOneAndUpdate(
+      { _id: taskId },
+      { $push: { comments: rawData } },
+      { new: true }
+    );
+    // NOTE  {new: true} returns new version (after update)
+    if (!data) {
+      throw new ApiError("Invalid ID or you do not own this list", 400);
+    }
+    return data;
+  }
+
   async edit(taskId, userId, update) {
     let data = await _repository.findOneAndUpdate(
       { _id: taskId, authorId: userId },

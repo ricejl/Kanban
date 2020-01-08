@@ -23,7 +23,7 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
-    tasks: []
+    tasks: {}
   },
   mutations: {
     // list mutations
@@ -45,11 +45,8 @@ export default new Vuex.Store({
       state.lists.push(list);
     },
     // task mutations
-    setTasks(state, tasks) {
-      state.tasks = tasks;
-    },
-    addTask(state, task) {
-      state.tasks.push(task);
+    setTasks(state, payload) {
+      Vue.set(state.tasks, payload.listId, payload.data);
     },
     // reset state to avoid user data exposure
     resetState(state) {
@@ -125,27 +122,27 @@ export default new Vuex.Store({
     },
     deleteList({ commit, dispatch }, { boardId, listId }) {
       api.delete("lists/" + listId).then(res => {
-        dispatch("getLists", boardId)
-      })
+        dispatch("getLists", boardId);
+      });
     },
     //#endregion
 
     //#region -- TASK --
     createTask({ commit, dispatch }, taskData) {
       api.post("tasks", taskData).then(res => {
-        commit("addTask", res.data);
+        dispatch("getTasks", res.data.listId);
       });
     },
     getTasks({ commit, dispatch }, listId) {
       api.get("lists/" + listId + "/tasks").then(res => {
-        commit("setTasks", res.data);
+        commit("setTasks", { listId, data: res.data });
       });
     },
     deleteTask({ commit, dispatch }, { listId, taskId }) {
       api.delete("tasks/" + taskId).then(res => {
         dispatch("getTasks", listId);
       });
-    },
+    }
     //#endregion
   }
 });
