@@ -26,27 +26,32 @@ export default new Vuex.Store({
     tasks: []
   },
   mutations: {
+    // list mutations
     setUser(state, user) {
       state.user = user;
     },
+    // board mutations
     setBoards(state, boards) {
       state.boards = boards;
     },
     setActiveBoard(state, board) {
       state.activeBoard = board;
     },
+    // list mutations
     setLists(state, lists) {
       state.lists = lists;
     },
     addList(state, list) {
       state.lists.push(list);
     },
+    // task mutations
     setTasks(state, tasks) {
       state.tasks = tasks;
     },
     addTask(state, task) {
       state.tasks.push(task);
     },
+    // reset state to avoid user data exposure
     resetState(state) {
       state.user = {};
     }
