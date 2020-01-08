@@ -13,10 +13,13 @@
       />
       <button type="submit">Add list</button>
     </form>
+    <list v-for="list in lists" :key="list.id" :listData="list"></list>
   </div>
 </template>
 
 <script>
+import List from "@/components/List";
+
 export default {
   name: "board",
   mounted() {
@@ -31,6 +34,9 @@ export default {
       }
     };
   },
+  components: {
+    List
+  },
   computed: {
     board() {
       return (
@@ -38,10 +44,10 @@ export default {
           title: "Loading..."
         }
       );
+    },
+    lists() {
+      return this.$store.state.lists;
     }
-  },
-  lists() {
-    return this.$store.state.lists.find(list => list.boardId == this.board.id);
   },
   props: ["boardId"],
   methods: {
