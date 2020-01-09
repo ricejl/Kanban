@@ -142,7 +142,17 @@ export default new Vuex.Store({
       api.delete("tasks/" + taskId).then(res => {
         dispatch("getTasks", listId);
       });
-    }
+    },
     //#endregion
+
+    //#region -- COMMENT --
+    createComment({ commit, dispatch }, { taskId, commentData }) {
+      api.post("tasks/" + taskId + "/comments", commentData).then(res => {
+        dispatch("getComments", res.data.taskId);
+      });
+    },
+    getComments({ commit, dispatch }, taskId) {
+      // FIXME pickup here
+    }
   }
 });

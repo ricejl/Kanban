@@ -20,7 +20,6 @@ class TaskService {
   }
 
   async addComment(taskId, rawData) {
-    console.log("rawData from add comment in task service", rawData);
     let data = await _repository.findOneAndUpdate(
       { _id: taskId },
       { $push: { comments: rawData } },
