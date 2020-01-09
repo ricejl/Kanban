@@ -48,6 +48,8 @@ export default new Vuex.Store({
     setTasks(state, payload) {
       Vue.set(state.tasks, payload.listId, payload.data);
     },
+    // comment mutations
+
     // reset state to avoid user data exposure
     resetState(state) {
       state.user = {};
@@ -146,13 +148,16 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- COMMENT --
-    createComment({ commit, dispatch }, { taskId, commentData }) {
-      api.post("tasks/" + taskId + "/comments", commentData).then(res => {
-        dispatch("getComments", res.data.taskId);
+    createComment({ commit, dispatch }, { taskId, listId, comment }) {
+      api.post("tasks/" + taskId + "/comments", comment).then(res => {
+        dispatch("getTasks", listId);
       });
     },
-    getComments({ commit, dispatch }, taskId) {
-      // FIXME pickup here
+    deleteComment({ commit, dispatch }, payload) {
+      // TODO FIXME SECTION NOTE change delete to put if needed below
+      api.put("tasks/" + payload._id + "/comments/", payload).then(res => {
+        dispatch("getTasks", payload.listId);
+      });
     }
   }
 });

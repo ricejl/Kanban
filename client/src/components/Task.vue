@@ -4,8 +4,11 @@
       <div class="card-body">
         <div>{{taskData.description}}</div>
         <button @click="deleteTask(taskData.listId, taskData._id)">X</button>
-        <div v-if="comments">{{taskData.comments}}</div>
-        <form @submit.prevent="createComment(taskData._id)">
+        <div v-if="taskData.comments.length">
+          {{taskData.comments}}
+          <button @click="deleteComment(taskData)">X</button>
+        </div>
+        <form @submit.prevent="createComment(taskData._id, taskData.listId)">
           <input
             type="text"
             placeholder="Enter comment..."
@@ -33,12 +36,15 @@ export default {
     deleteTask(listId, taskId) {
       this.$store.dispatch("deleteTask", { listId, taskId });
     },
-    createComment(taskId) {
+    createComment(taskId, listId) {
       let comment = { ...this.newComment };
-      this.$store.dispatch("createComment", { taskId, comment });
+      this.$store.dispatch("createComment", { taskId, listId, comment });
       this.newComment = {
         content: ""
       };
+    },
+    deleteComment(payload) {
+      this.$store.dispatch("deleteComment", payload);
     }
   }
 };
