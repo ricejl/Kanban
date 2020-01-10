@@ -13,7 +13,6 @@ class TaskService {
     return data;
   }
 
-
   // FIXME pickup here - all functions below this point must be updated
   async createTask(rawData) {
     let data = await _repository.create(rawData);
@@ -53,12 +52,11 @@ class TaskService {
     return data;
   }
 
-  async removeComment(taskId, userId, payload) {
-    let data = await _repository.findOneAndRemove({
-      taskId: taskId,
-      authorId: userId,
-      id: payload.comments._id
-    });
+  async removeComment(payload) {
+    let data = await _repository.findOneAndUpdate(
+      { _id: payload.taskId },
+      { $pull: { comments: { _id: payload.commentId } } },
+      { new: true });
     if (!data) {
       throw new ApiError("Invalid ID or you do not own this comment", 400);
     }

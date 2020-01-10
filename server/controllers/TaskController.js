@@ -13,7 +13,6 @@ export default class TaskController {
       .put("/:id", this.edit)
       .put("/:id/comments", this.removeComment)
       .delete("/:id", this.delete)
-      .delete("/:taskid/comments/:commentid", this.deleteComment)
       .use(this.defaultRoute);
   }
 
@@ -55,10 +54,11 @@ export default class TaskController {
   async edit(req, res, next) {
     try {
       let data = await _taskService.edit(
-        req.params.id,
-        req.session.uid,
-        req.body
-      );
+        {
+          taskId: req.params.id,
+          userId: req.session.uid,
+          commentId: req.body
+        });
       return res.send(data);
     } catch (error) {
       next(error);
@@ -67,12 +67,11 @@ export default class TaskController {
 
   async removeComment(req, res, next) {
     try {
-      let data = await _taskService.removeComment(
-        req.params.id,
-        req.session.uid,
-        req.body
-      );
-      console.log("remove comment task controller", req.body); // log here
+      let data = await _taskService.removeComment({
+        taskId: req.body.taskData._id,
+        userId: req.session.uid,
+        commentId: req.body.commentId
+      });
       return res.send(data);
     } catch (error) {
       next(error);
@@ -82,15 +81,6 @@ export default class TaskController {
   async delete(req, res, next) {
     try {
       await _taskService.delete(req.params.id, req.session.uid);
-      return res.send("Successfully deleted");
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async deleteComment(req, res, next) {
-    try {
-      await _taskService.deleteComment(req.params.comments, req.params.id, req.session.uid);
       return res.send("Successfully deleted");
     } catch (error) {
       next(error);

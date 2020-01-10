@@ -153,10 +153,10 @@ export default new Vuex.Store({
         dispatch("getTasks", listId);
       });
     },
-    deleteComment({ commit, dispatch }, payload) {
-      // TODO FIXME SECTION NOTE change delete to put if needed below
-      api.put("tasks/" + payload._id + "/comments/", payload).then(res => {
-        dispatch("getTasks", payload.listId);
+
+    deleteComment({ commit, dispatch }, { taskData, commentId }) {
+      api.put("tasks/" + taskData._id + "/comments/", { taskData, commentId }).then(res => {
+        dispatch("getTasks", taskData.listId);
       });
     }
   }

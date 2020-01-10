@@ -4,10 +4,12 @@
       <div class="card-body">
         <div>{{taskData.description}}</div>
         <button @click="deleteTask(taskData.listId, taskData._id)">X</button>
-        <div v-if="taskData.comments.length">
-          {{taskData.comments}}
-          <button @click="deleteComment(taskData)">X</button>
+        <!-- <div v-if="taskData.comments.length">{{taskData.comments}}</div> -->
+        <div v-for="comment in taskData.comments" :key="comment._id">
+          {{ comment.content }}
+          <button @click="deleteComment(taskData, comment._id)">X</button>
         </div>
+
         <form @submit.prevent="createComment(taskData._id, taskData.listId)">
           <input
             type="text"
@@ -43,8 +45,8 @@ export default {
         content: ""
       };
     },
-    deleteComment(payload) {
-      this.$store.dispatch("deleteComment", payload);
+    deleteComment(taskData, commentId) {
+      this.$store.dispatch("deleteComment", { taskData, commentId });
     }
   }
 };
