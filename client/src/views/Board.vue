@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid board board-bg">
-    <div class="row pt-3">
+    <div class="row pt-3 bg-glass">
       <div class="col text-left">
         <router-link :to="{name: 'boards'}">
-          <button title="Back">
-            <i class="fas fa-arrow-left"></i>
+          <button class="btn btn-light" title="Back">
+            <i class="fas fa-arrow-left"></i> Back to Boards
           </button>
         </router-link>
       </div>
@@ -12,7 +12,7 @@
         <h3 class="text-white justify-content-center">{{board.title}}</h3>
       </div>
       <div class="col text-left">
-        <form class="list-form-style" @submit.prevent="createList">
+        <form class="list-form-style input-group" @submit.prevent="createList">
           <input
             class="form-control"
             type="text"
@@ -22,7 +22,11 @@
             placeholder="Enter list title"
             required
           />
-          <button type="submit">Add list</button>
+          <div class="input-group-append">
+            <button class="btn btn-light btn-border-custom" type="submit">
+              <i class="fas fa-plus fa-sm"></i>
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -89,6 +93,17 @@ export default {
   background-position: center;
   min-height: 100vh;
   min-width: 100vh;
+}
+
+.bg-glass {
+  background-color: rgba(0, 0, 0, 0.4);
+  min-height: 12vh;
+}
+
+.btn-border-custom {
+  border-top: 1px solid #ced4da;
+  border-right: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da;
 }
 
 .list-form-style {
