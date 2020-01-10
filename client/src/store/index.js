@@ -140,6 +140,12 @@ export default new Vuex.Store({
         commit("setTasks", { listId, data: res.data });
       });
     },
+    moveTask({ commit, dispatch }, { taskId, listIdFrom, listIdTo }) {
+      api.put("tasks/" + taskId, { listId: listIdTo }).then(res => {
+        dispatch("getTasks", listIdFrom);
+        dispatch("getTasks", listIdTo);
+      });
+    },
     deleteTask({ commit, dispatch }, { listId, taskId }) {
       api.delete("tasks/" + taskId).then(res => {
         dispatch("getTasks", listId);
@@ -155,9 +161,11 @@ export default new Vuex.Store({
     },
 
     deleteComment({ commit, dispatch }, { taskData, commentId }) {
-      api.put("tasks/" + taskData._id + "/comments/", { taskData, commentId }).then(res => {
-        dispatch("getTasks", taskData.listId);
-      });
+      api
+        .put("tasks/" + taskData._id + "/comments/", { taskData, commentId })
+        .then(res => {
+          dispatch("getTasks", taskData.listId);
+        });
     }
   }
 });

@@ -3,6 +3,31 @@
     <div class="card" style="width: 15rem;">
       <div class="card-body">
         <div>{{taskData.description}}</div>
+        <!-- SECTION dropdown to move task to different list -->
+        <div class="btn-group dropright">
+          <button type="button" class="btn btn-secondary">Split dropright</button>
+          <button
+            type="button"
+            class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle Dropright</span>
+          </button>
+          <div class="dropdown-menu">
+            <button
+              class="dropdown-item"
+              type="button"
+              v-for="list in lists"
+              :key="list.id"
+              @click="moveTask(taskData._id, taskData.listId, list.id)"
+            >{{list.title}}</button>
+
+            <!-- Dropdown menu links -->
+            <!-- each of these should be the name of a list with onclick="changeList(taskData._id, taskData.listId)" -->
+          </div>
+        </div>
         <button @click="deleteTask(taskData.listId, taskData._id)">X</button>
         <!-- <div v-if="taskData.comments.length">{{taskData.comments}}</div> -->
         <div v-for="comment in taskData.comments" :key="comment._id">
@@ -35,6 +60,9 @@ export default {
   },
   props: ["taskData"],
   methods: {
+    moveTask(taskId, listIdFrom, listIdTo) {
+      this.$store.dispatch("moveTask", { taskId, listIdFrom, listIdTo });
+    },
     deleteTask(listId, taskId) {
       this.$store.dispatch("deleteTask", { listId, taskId });
     },
@@ -47,6 +75,13 @@ export default {
     },
     deleteComment(taskData, commentId) {
       this.$store.dispatch("deleteComment", { taskData, commentId });
+    }
+  },
+  computed: {
+    lists() {
+      return this.$store.state.lists.filter(
+        list => list.boardId == this.taskData.boardId
+      );
     }
   }
 };
