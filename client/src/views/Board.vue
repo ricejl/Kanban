@@ -1,42 +1,54 @@
 <template>
   <div class="container-fluid board board-bg">
     <div class="row pt-3 bg-glass">
-      <div class="col text-left">
+      <div class="col-4 text-left">
         <router-link :to="{name: 'boards'}">
-          <button class="btn btn-light" title="Back">
-            <i class="fas fa-arrow-left"></i> Back to Boards
+          <button class="btn bg-dark-text-grey" title="Back">
+            <i class="fas fa-arrow-left bg-dark-text-grey"></i> All Boards
           </button>
         </router-link>
       </div>
-      <div class="col">
-        <h3 class="text-white justify-content-center">{{board.title}}</h3>
+      <div class="col-4">
+        <h3 class="text-grey justify-content-center">
+          <i class="fas fa-bolt">Kanban</i>
+        </h3>
       </div>
-      <div class="col text-left">
+      <div class="col-4"></div>
+    </div>
+    <div class="row pt-2 pl-2 pr-2">
+      <div class="col-4">
+        <h5 class="text-grey text-left">{{board.title}}</h5>
+      </div>
+      <div class="col-4 offset-4 text-left">
         <form class="list-form-style input-group" @submit.prevent="createList">
           <input
-            class="form-control"
+            class="form-control bg-dark-text-grey"
             type="text"
             name="title"
             id="title"
             v-model="newList.title"
-            placeholder="Enter list title"
+            placeholder="New list title..."
             required
           />
           <div class="input-group-append">
-            <button class="btn btn-light btn-border-custom" type="submit">
+            <button class="btn bg-dark-text-grey" type="submit">
               <i class="fas fa-plus fa-sm"></i>
             </button>
           </div>
         </form>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <list
+          class="d-inline-flex direction-row p-1"
+          v-for="list in lists"
+          :key="list.id"
+          :listData="list"
+        ></list>
+      </div>
+    </div>
     <!-- <button @click="showForm">New List</button> -->
-    <list
-      class="d-inline-flex direction-row p-1"
-      v-for="list in lists"
-      :key="list.id"
-      :listData="list"
-    ></list>
   </div>
 </template>
 
@@ -93,6 +105,8 @@ export default {
   background-position: center;
   min-height: 100vh;
   min-width: 100vh;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .bg-glass {
@@ -100,11 +114,24 @@ export default {
   min-height: 12vh;
 }
 
-.btn-border-custom {
+.bg-dark-text-grey {
+  background-color: #212428;
+  color: #d4d7dd;
+  border: #212428;
+}
+
+.bg-dark-text-grey:hover {
+  background-color: #141618;
+}
+
+.text-grey {
+  color: #d4d7dd;
+}
+/* .btn-border-custom {
   border-top: 1px solid #ced4da;
   border-right: 1px solid #ced4da;
   border-bottom: 1px solid #ced4da;
-}
+} */
 
 .list-form-style {
   min-width: 18rem;

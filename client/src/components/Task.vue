@@ -1,18 +1,19 @@
 <template>
-  <div class="task">
-    <div class="card" style="width: 15rem;">
-      <div class="card-body">
+  <div class="task pb-2">
+    <div class="card" style="width: 17rem;">
+      <div class="card-body color-lightest-grey text-left border-rounded">
         <div>{{taskData.description}}</div>
         <!-- SECTION dropdown to move task to different list -->
         <div class="btn-group dropright">
           <button
             type="button"
-            class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+            class="btn btn-sm"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <span class="sr-only">Toggle Dropright</span>
+            <i class="fas fa-ellipsis-v"></i>
+            <span class="sr-only"></span>
           </button>
           <div class="dropdown-menu">
             Move to:
@@ -88,4 +89,15 @@ export default {
 </script>
 
 <style>
+.color-lightest-grey {
+  background-color: #f6f6f6;
+}
+
+.border-rounded {
+  border-radius: 0.25rem;
+}
+/* .sr-only::after {
+  border-left: none;
+  display: none;
+} */
 </style>

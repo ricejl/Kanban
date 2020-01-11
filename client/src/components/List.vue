@@ -1,9 +1,9 @@
 <template>
   <div class="list">
     <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{listData.title}}</h5>
-        <button @click="deleteList(listData.boardId, listData.id)">X</button>
+      <i class="fas fa-times" @click="deleteList(listData.boardId, listData.id)"></i>
+      <div class="card-body color-light-grey p-2">
+        <h5 class="card-title text-left pl-1">{{listData.title}}</h5>
         <task v-for="task in tasks" :key="task.id" :taskData="task"></task>
 
         <form @submit.prevent="createTask()">
@@ -65,4 +65,14 @@ export default {
 </script>
 
 <style scoped>
+.fa-times {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  cursor: pointer;
+}
+
+.color-light-grey {
+  background-color: #eae9e9;
+}
 </style>
