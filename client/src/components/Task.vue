@@ -4,6 +4,8 @@
       <div class="card-body color-lightest-grey text-left border-rounded">
         <div>{{taskData.description}}</div>
         <!-- SECTION dropdown to move task to different list -->
+        <i class="fas fa-list-ul"></i>
+        <!-- FIXME move delete and switch list functions into single dropdown under fa-list-ul and move create comment into dropdown menu with modal to display form -->
         <div class="btn-group dropright">
           <button
             type="button"
@@ -38,8 +40,9 @@
 
         <form @submit.prevent="createComment(taskData._id, taskData.listId)">
           <input
+            class="form-control"
             type="text"
-            placeholder="Enter comment..."
+            placeholder="New comment..."
             name="comment-content"
             v-model="newComment.content"
           />

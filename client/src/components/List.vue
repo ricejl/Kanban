@@ -6,15 +6,18 @@
         <h5 class="card-title text-left pl-1">{{listData.title}}</h5>
         <task v-for="task in tasks" :key="task.id" :taskData="task"></task>
 
-        <form @submit.prevent="createTask()">
+        <form @submit.prevent="createTask()" class="input-group">
           <input
+            class="input-group form-control"
             type="text"
             name="task"
             v-model="newTask.description"
-            placeholder="Enter new task..."
+            placeholder="New task..."
             required
           />
-          <button type="submit">Add task</button>
+          <div class="input-group-append">
+            <button class="btn btn-blue" type="submit">Add</button>
+          </div>
         </form>
       </div>
     </div>
@@ -74,5 +77,14 @@ export default {
 
 .color-light-grey {
   background-color: #eae9e9;
+}
+
+.btn-blue {
+  background-color: #3282b8;
+  color: #eae9e9;
+}
+
+.btn-blue:hover {
+  background-color: #0f4c75;
 }
 </style>
