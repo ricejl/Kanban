@@ -73,6 +73,11 @@ export default {
   top: 0.5em;
   right: 0.5em;
   cursor: pointer;
+  opacity: 0.4;
+}
+
+.fa-times:hover {
+  opacity: 0.7;
 }
 
 .color-light-grey {

@@ -9,15 +9,15 @@
           </button>
         </router-link>
       </div>
-      <div class="col-4">
-        <h3 class="text-grey justify-content-center" id="font-logo">Kanban</h3>
+      <div class="col-4 pt-2">
+        <h3 class="text-lightest-grey justify-content-center" id="font-logo">Kanban</h3>
       </div>
       <div class="col-4"></div>
     </header>
     <main>
-      <div class="row pt-2 pl-2 pr-2">
+      <div class="row pt-2 pl-2 pr-1">
         <div class="col-4">
-          <h5 class="text-grey text-left font-neucha">{{board.title}}</h5>
+          <h5 class="text-lightest-grey text-left">{{board.title}}</h5>
         </div>
         <div class="col-4 offset-4 text-left">
           <form class="list-form-style input-group" @submit.prevent="createList">
@@ -120,7 +120,7 @@ export default {
   border: #212428;
 }
 
-.bg-dark-text-grey:hover {
+.bg-dark-text-lightest-grey:hover {
   background-color: #141618;
 }
 
@@ -132,8 +132,8 @@ export default {
   font-family: "Neucha", cursive;
 }
 
-.text-grey {
-  color: #d4d7dd;
+.text-lightest-grey {
+  color: #f6f6f6;
 }
 /* .btn-border-custom {
   border-top: 1px solid #ced4da;
