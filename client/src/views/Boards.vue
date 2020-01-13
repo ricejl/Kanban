@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 offset-lg-4 text-center pt-5">
+        <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4 text-center pt-5">
           <form class="form-group" @submit.prevent="addBoard">
             <input
               class="form-control mb-1"
