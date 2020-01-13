@@ -99,6 +99,10 @@ export default {
   background-color: #141618;
 }
 
+a {
+  color: #3282b8;
+}
+
 .btn-blue {
   background-color: #3282b8;
 }
