@@ -37,8 +37,8 @@
           </div>
         </div>
 
-        <div class="pl-2" v-for="comment in taskData.comments" :key="comment._id">
-          {{ comment.content }}
+        <div class="pl-2 prevent-overflow" v-for="comment in taskData.comments" :key="comment._id">
+          * {{ comment.content }}
           <button
             class="border-0 btn-transparent"
             @click="deleteComment(taskData, comment._id)"
@@ -114,12 +114,12 @@ export default {
 
 .fa-ellipsis-v,
 .fa-times {
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 .fa-ellipsis-v:hover,
 .fa-times:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .fa-times:hover {
@@ -130,5 +130,9 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.prevent-overflow {
+  white-space: normal;
 }
 </style>
