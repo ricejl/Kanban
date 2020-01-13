@@ -40,6 +40,16 @@ class ListService {
       throw new ApiError("Invalid ID or you do not own this board", 400);
     }
   }
+
+  // function for cascade deletion of lists when board is deleted, if necessary
+  async deleteMany(payload) {
+    let data = await _repository.deleteMany({
+      boardId: payload.boardId
+    });
+    if (!data) {
+      throw new ApiError("Invalid ID", 400);
+    }
+  }
 }
 
 const _listService = new ListService();

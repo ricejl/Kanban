@@ -7,6 +7,7 @@ export default class TaskController {
     this.router = express
       .Router()
       .use(Authorize.authenticated)
+      .get("/", this.getAllTasks)
       .get("/:id/comments", this.getComments)
       .post("", this.createTask)
       .post("/:id/comments", this.addComment)
@@ -20,6 +21,16 @@ export default class TaskController {
 
   defaultRoute(req, res, next) {
     next({ status: 404, message: "No Such Route" });
+  }
+
+  async getAllTasks(req, res, next) {
+    try {
+      req.body.authorId = req.session.uid;
+      let data = await _taskService.getAllTasks(req.session.uid);
+      return res.status(201).send(data);
+    } catch (error) {
+      next(error);
+    }
   }
 
   async createTask(req, res, next) {

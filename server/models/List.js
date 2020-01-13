@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import _taskService from "../services/TaskService"
 let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
@@ -12,7 +13,7 @@ const List = new Schema({
 List.pre('deleteMany', function (next) {
   //lets find all the lists and remove them
   Promise.all([
-    //_taskService.deleteMany({ listId: this._conditions_id }),
+    _taskService.deleteMany({ listId: this._conditions._id }),
   ])
     .then(() => next())
     .catch(err => next(err))
@@ -22,7 +23,7 @@ List.pre('deleteMany', function (next) {
 List.pre('findOneAndRemove', function (next) {
   //lets find all the lists and remove them
   Promise.all([
-    // _taskRepo.deleteMany({ boardId: this._conditions._id })
+    _taskService.deleteMany({ listId: this._conditions._id })
   ])
     .then(() => next())
     .catch(err => next(err))
