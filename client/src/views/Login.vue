@@ -1,20 +1,34 @@
 <template>
-  <div class="login">
-    <form v-if="loginForm" @submit.prevent="loginUser">
-      <input type="email" v-model="creds.email" placeholder="email" />
-      <input type="password" v-model="creds.password" placeholder="password" />
-      <button class="btn btn-success" type="submit">Login</button>
-    </form>
-    <form v-else @submit.prevent="register">
-      <input type="text" v-model="newUser.name" placeholder="name" />
-      <input type="email" v-model="newUser.email" placeholder="email" />
-      <input type="password" v-model="newUser.password" placeholder="password" />
-      <button class="btn btn-warning" type="submit">Create Account</button>
-    </form>
-    <div class="action" @click="loginForm = !loginForm">
-      <p v-if="loginForm">No account? Click here to Register</p>
-      <p v-else>Already have an account? Click here to Login</p>
-    </div>
+  <div class="login container-fluid bg-lightest-grey font-primary">
+    <header class="row pt-5 p-3">
+      <div class="col pt-5">
+        <h3 id="font-logo">Kanban</h3>
+      </div>
+    </header>
+    <main class="row">
+      <div class="col-lg-4 offset-lg-4 text-center">
+        <form class="form-group" v-if="loginForm" @submit.prevent="loginUser">
+          <input class="form-control mb-1" type="email" v-model="creds.email" placeholder="email" />
+          <input
+            class="form-control mb-3"
+            type="password"
+            v-model="creds.password"
+            placeholder="password"
+          />
+          <button class="btn btn-blue text-white" type="submit">Login</button>
+        </form>
+        <form v-else @submit.prevent="register">
+          <input type="text" v-model="newUser.name" placeholder="name" />
+          <input type="email" v-model="newUser.email" placeholder="email" />
+          <input type="password" v-model="newUser.password" placeholder="password" />
+          <button class="btn btn-warning" type="submit">Create Account</button>
+        </form>
+        <div class="action pt-2" @click="loginForm = !loginForm">
+          <p v-if="loginForm">No account? Click here to register.</p>
+          <p v-else>Already have an account? Click here to login.</p>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -53,7 +67,28 @@ export default {
 </script>
 
 <style>
+.bg-lightest-grey {
+  background-color: #f6f6f6;
+  min-height: 100vh;
+}
+
+.font-primary {
+  font-family: "Neucha", cursive;
+}
+
 .action {
   cursor: pointer;
+}
+
+#font-logo {
+  font-family: "Special Elite", cursive;
+}
+
+.btn-blue {
+  background-color: #3282b8;
+}
+
+.btn-blue:hover {
+  background-color: #0f4c75;
 }
 </style>

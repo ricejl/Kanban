@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid board board-bg font-neucha">
+  <div class="container-fluid board board-bg font-primary">
     <header class="row pt-3 bg-glass">
       <div class="col-4 text-left">
         <router-link :to="{name: 'boards'}">
@@ -10,7 +10,7 @@
         </router-link>
       </div>
       <div class="col-4">
-        <h3 class="text-grey justify-content-center" id="font-elite">Kanban</h3>
+        <h3 class="text-grey justify-content-center" id="font-logo">Kanban</h3>
       </div>
       <div class="col-4"></div>
     </header>
@@ -124,11 +124,11 @@ export default {
   background-color: #141618;
 }
 
-#font-elite {
+#font-logo {
   font-family: "Special Elite", cursive;
 }
 
-.font-neucha {
+.font-primary {
   font-family: "Neucha", cursive;
 }
 
