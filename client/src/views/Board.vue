@@ -19,7 +19,7 @@
         <div class="col-4">
           <h5 class="text-lightest-grey text-left">{{board.title}}</h5>
         </div>
-        <div class="col-4 offset-4 text-left">
+        <div class="col-4 offset-4 text-left pr-2">
           <form class="list-form-style input-group" @submit.prevent="createList">
             <input
               class="form-control bg-dark-text-grey"
@@ -38,8 +38,8 @@
           </form>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
+      <div class="row lists">
+        <div class="col pl-0">
           <list
             class="d-inline-flex direction-row p-1"
             v-for="list in lists"
@@ -105,8 +105,6 @@ export default {
   background-position: center;
   min-height: 100vh;
   min-width: 100vh;
-  overflow: auto;
-  white-space: nowrap;
 }
 
 .bg-glass {
@@ -135,11 +133,6 @@ export default {
 .text-lightest-grey {
   color: #f6f6f6;
 }
-/* .btn-border-custom {
-  border-top: 1px solid #ced4da;
-  border-right: 1px solid #ced4da;
-  border-bottom: 1px solid #ced4da;
-} */
 
 .list-form-style {
   min-width: 18rem;
@@ -147,5 +140,21 @@ export default {
 
 .fa-arrow-left {
   cursor: pointer;
+}
+
+.lists {
+  overflow: auto;
+  white-space: nowrap;
+  min-height: 80vh;
+}
+
+.lists::-webkit-scrollbar {
+  height: 10px;
+  background-color: transparent;
+}
+
+.lists::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
 }
 </style>

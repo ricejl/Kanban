@@ -33,7 +33,6 @@
               @click="deleteTask(taskData.listId, taskData._id)"
             >Delete task</button>
             <!-- Dropdown menu links -->
-            <!-- each of these should be the name of a list with onclick="changeList(taskData._id, taskData.listId)" -->
           </div>
         </div>
 
